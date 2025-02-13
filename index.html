@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Kiss Day, My Love!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            overflow: hidden;
+            font-family: 'Pacifico', cursive;
+            position: relative;
+            transition: all 0.5s;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            transition: all 0.5s;
+        }
+
+        .couple-photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin: 20px auto;
+            background-image: url("love.jpg" );
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 0 30px rgba(255,255,255,0.5);
+            transition: all 0.5s;
+        }
+
+        h1, .message, button {
+            transition: all 0.5s;
+        }
+
+        .hidden {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            transform: translateY(20px) !important;
+        }
+
+        .love-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+        }
+
+        .love-message.active {
+            opacity: 1;
+            visibility: visible;
+            animation: heartBeat 1.5s infinite;
+        }
+
+        .kiss-storm {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 998;
+        }
+
+        .kiss {
+            position: absolute;
+            font-size: 40px;
+            animation: kissFloat 3s linear forwards;
+        }
+
+        .from-durga {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 1.2em;
+            color: white;
+            font-family: 'Dancing Script', cursive;
+            opacity: 0.8;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        @keyframes kissFloat {
+            0% {
+                opacity: 1;
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        @keyframes photoGlow {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(255,255,255,0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(255,255,255,0.8); }
+        }
+
+        .photo-glow {
+            animation: photoGlow 2s infinite;
+        }
+
+        .lots-of-kisses {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            font-size: 2em;
+            color: white;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s;
+        }
+
+        .lots-of-kisses.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        button {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            background: #fff;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Pacifico', cursive;
+            color: #ff1493;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255,255,255,0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Happy Kiss Day, My Queen! 👑💋</h1>
+        <div class="couple-photo"></div>
+        <div class="message">
+            To My Forever Valentine ❤️<br>
+            Every kiss with you feels like the first magical moment 🌟<br>
+            Your love is the sweetest addiction I never want to quit 🍯<br>
+            Forever and Always, Your Loving Partner 💞
+        </div>
+        <button onclick="createRomanticMoment()">Send Virtual Kisses 💋</button>
+    </div>
+
+    <div class="love-message">I Love You So Much! 💖</div>
+    <div class="lots-of-kisses">Lots of Kisses Coming Your Way! 💋💋💋</div>
+    <div class="kiss-storm" id="kissStorm"></div>
+    <div class="from-durga">From Durga Prasad 💌</div>
+
+    <script>
+        function createRomanticMoment() {
+            // Hide initial elements
+            document.querySelectorAll('h1, .message, button').forEach(el => {
+                el.classList.add('hidden');
+            });
+
+            // Show love messages
+            document.querySelector('.love-message').classList.add('active');
+            document.querySelector('.lots-of-kisses').classList.add('active');
+            document.querySelector('.couple-photo').classList.add('photo-glow');
+
+            // Create kiss storm
+            for(let i = 0; i < 50; i++) {
+                const kiss = document.createElement('div');
+                kiss.className = 'kiss';
+                kiss.innerHTML = '💋';
+                kiss.style.left = Math.random() * 100 + 'vw';
+                kiss.style.animationDelay = Math.random() * 2 + 's';
+                document.getElementById('kissStorm').appendChild(kiss);
+
+                setTimeout(() => kiss.remove(), 3000);
+            }
+
+            // Add background glow
+            document.body.style.background = 'linear-gradient(45deg, #ff1493, #ff69b4)';
+        }
+    </script>
+</body>
+</html>
